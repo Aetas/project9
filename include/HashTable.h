@@ -1,6 +1,8 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
+#include<string>
+
 struct Movie{
     std::string title;
     int year;
