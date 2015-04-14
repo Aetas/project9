@@ -1,18 +1,25 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
-struct Movie{
+#include<string>
+
+struct Movie
+{
     std::string title;
     int year;
     Movie *next;
 
-    Movie(){};
+    Movie()
+	{
+		title = "";
+		year = -1;
+	};
 
-    Movie(std::string in_title, int in_year)
+    Movie(std::string& in_title, int& in_year)
     {
         title = in_title;
         year = in_year;
-    }
+	};
 
 };
 
