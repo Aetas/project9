@@ -7,7 +7,7 @@ struct Movie
 {
     std::string title;
     int year;
-    Movie *next;
+    Movie* next;
 
     Movie()
 	{
@@ -29,10 +29,9 @@ class HashTable
         HashTable(int);
         ~HashTable();
         void insertMovie(std::string in_title);
-        Movie* findMovie(std::string in_title, int *index);
+        Movie* findMovie(std::string in_title, int* index);
         void deleteMovie(std::string in_title);
         void printInventory();
-    protected:
     private:
         Movie *hashTable;
 };

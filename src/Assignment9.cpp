@@ -44,34 +44,29 @@ int main(int argc, char* argv[])
 
 		cin >> select;
 
-		if (select == 1)	//Print Verticies
+		if (select == 1)	//Insert Movie
 		{
 
 		}
 
-		if (select == 2)	//Find Districts
+		if (select == 2)	//Delete Movie
 		{
 
 		}
 
-		if (select == 3)	//Find Shortest Path
+		if (select == 3)	//Find Movie
 		{
 
 		}
 
-		if (select == 4)	//Find Shortest Distance
+		if (select == 4)	//Print Table of Contents
 		{
 
 		}
 
-		if (select == 5)	//Extra Credit
-		{
-			//
-		}
-
-		if (select == 6)	//Quit
+		if (select == 5)	//Quit
 			cout << "Goodbye!" << endl;
-		if (select > 6)
+		if (select > 5)
 			cout << "---That was not an option.---\n\n";
 	}
 
