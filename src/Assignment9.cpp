@@ -1,13 +1,21 @@
 /*
-
-
+// Derek Prince
+// Assignment 9
+// Hashing Movies (Perfectly) 
+// Just kidding.
+// Still hashing though.
+// 
 */
+
+#ifndef H_TABLE_SIZE
+#define H_TABLE_SIZE 53
+#endif	//H_TABLE_SIZE
+
 
 #include<iostream>
 #include<string>
 #include<fstream>
 #include"../include/HashTable.h"
-
 
 using std::cin;
 using std::cout;
@@ -23,18 +31,18 @@ int main(int argc, char* argv[])
 	in_file.open(argv[1]);
 	if (in_file.is_open())
 	{
-		int rating, year, quantity;
+		int year;
 		string title, buffer;
 		while (!in_file.eof())
 		{
-			getline(in_file, buffer, ',');
-			rating = stoi(buffer);
+			getline(in_file, buffer, ',');	//rating - ditch
 			getline(in_file, buffer, ',');
 			title = buffer;
 			getline(in_file, buffer, ',');
 			year = stoi(buffer);
-			getline(in_file, buffer);
-			quantity = stoi(buffer);
+			getline(in_file, buffer);		//quantity - ditch
+
+			//add movie or hash then add
 			
 		}
 	}
@@ -42,7 +50,7 @@ int main(int argc, char* argv[])
 	{
 		//nothing for now.
 	}
-
+	
 	int select = 0;
 
 	while (select != 6)
