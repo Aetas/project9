@@ -23,7 +23,20 @@ int main(int argc, char* argv[])
 	in_file.open(argv[1]);
 	if (in_file.is_open())
 	{
-		//get shit done.
+		int rating, year, quantity;
+		string title, buffer;
+		while (!in_file.eof())
+		{
+			getline(in_file, buffer, ',');
+			rating = stoi(buffer);
+			getline(in_file, buffer, ',');
+			title = buffer;
+			getline(in_file, buffer, ',');
+			year = stoi(buffer);
+			getline(in_file, buffer);
+			quantity = stoi(buffer);
+			
+		}
 	}
 	else
 	{
