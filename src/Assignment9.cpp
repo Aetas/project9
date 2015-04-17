@@ -25,7 +25,7 @@ using std::string;
 
 int main(int argc, char* argv[])
 {
-	HashTable* hash = new HashTable(10);
+	HashTable* hash = new HashTable();
 
 	std::ifstream in_file;	//might actually be useless.
 	in_file.open(argv[1]);
