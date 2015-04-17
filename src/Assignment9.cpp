@@ -56,33 +56,52 @@ int main(int argc, char* argv[])
 	while (select != 6)
 	{
 
-		cout << "======Main Menu=====" << endl
-			<< "1. Insert Movie" << endl
-			<< "2. Delete Movie" << endl
-			<< "3. Find Movie" << endl
-			<< "4. Pritn Table of Contents" << endl
+		cout << "======Main Menu+=====" << endl
+			<< "1. Insert movie" << endl
+			<< "2. Delete movie" << endl
+			<< "3. Find movie" << endl
+			<< "4. Pritn table contents" << endl
 			<< "5. Quit" << endl;
 
 		cin >> select;
 
 		if (select == 1)	//Insert Movie
 		{
-
+			std::string title;
+			int year;
+			cout << "Enter title:" << endl;
+			cin.ignore(1000, '\n');
+			getline(cin, title);
+			cout << "Enter year:" << endl;
+			cin >> year;
+			hash->insertMovie(title, year);
 		}
 
 		if (select == 2)	//Delete Movie
 		{
-
+			std::string title;
+			cout << "Enter title:" << endl;
+			cin.ignore(1000, '\n');
+			getline(cin, title);
+			hash->deleteMovie(title);
 		}
 
 		if (select == 3)	//Find Movie
 		{
-
+			std::string title;
+			cout << "Enter title:" << endl;
+			cin.ignore(1000, '\n');
+			getline(cin, title);
+			Movie* found_movie = hash->findMovie(title);
+			if (found_movie == nullptr)
+				cout << "not found" << endl;
+			else
+				cout << found_movie->index << " : " << found_movie->title << " : " << found_movie->year << endl;
 		}
 
 		if (select == 4)	//Print Table of Contents
 		{
-
+			hash->printInventory();
 		}
 
 		if (select == 5)	//Quit

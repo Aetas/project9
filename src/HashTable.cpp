@@ -29,7 +29,16 @@ void HashTable::printInventory()
 	{
 		if (hashTable[i] = nullptr)
 			continue;	//skip rest
-		//cout shit
+		std::cout << hashTable[i]->title << " : " << hashTable[i]->year << std::endl;
+		if (hashTable[i]->next != nullptr)	//I wanted to do this after the initial cout because I don't want to allocate from the heap in the majority of cases.
+		{
+			Movie* temp = hashTable[i]->next;
+			while (temp != nullptr)			//traverse the linked list
+			{
+				std::cout << temp->title << " : " << temp->year << std::endl;
+				temp = temp->next;
+			}
+		}
 	}
 }
 
@@ -40,7 +49,7 @@ void HashTable::insertMovie(std::string& in_title, int& in_year)
 		collision_resolution(in_title, in_year, key);
 	else
 	{
-		Movie* temp = new Movie(in_title, in_year);
+		Movie* temp = new Movie(in_title, in_year, key);
 		hashTable[key] = temp;
 	}
 	size++;
@@ -56,7 +65,7 @@ void HashTable::deleteMovie(std::string& in_title)
 
 void HashTable::collision_resolution(std::string& in_title, int& in_year, int& key)
 {
-	Movie* new_movie = new Movie(in_title, in_year);
+	Movie* new_movie = new Movie(in_title, in_year, key);
 	Movie* it = hashTable[key]->next;
 	while (it->next != nullptr)
 		it = it->next;

@@ -8,12 +8,14 @@ struct Movie
 {
     std::string title;
     int year;
+	int index;			//simplest way to pass the index to main without printing in findMovie();
     Movie* next;
 
     Movie()
 	{
 		title = "";
 		year = -1;
+		index = -1;
 		next = nullptr;
 	};
 
@@ -21,6 +23,15 @@ struct Movie
     {
         title = in_title;
         year = in_year;
+		index = -1;
+		next = nullptr;
+	};
+
+	Movie(std::string& in_title, int& in_year, int& in_index)
+	{
+		title = in_title;
+		year = in_year;
+		index = in_index;
 		next = nullptr;
 	};
 
