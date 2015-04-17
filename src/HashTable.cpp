@@ -25,11 +25,16 @@ HashTable::~HashTable()
 
 void HashTable::printInventory()
 {
-	for (int i = 0; i < size; i++)
+	if (size == 0)	//nothing in dood-ma-bob
 	{
-		if (hashTable[i] = nullptr)
+		std::cout << "empty" << std::endl;	//I'm only tolerating a print in this function because it is a print function.
+		return;
+	}
+	for (int i = 0; i < H_TABLE_SIZE; i++)
+	{
+		if (hashTable[i] == nullptr)
 			continue;	//skip rest
-		std::cout << hashTable[i]->title << " : " << hashTable[i]->year << std::endl;
+		std::cout <<  hashTable[i]->title << " : " << hashTable[i]->year << std::endl;
 		if (hashTable[i]->next != nullptr)	//I wanted to do this after the initial cout because I don't want to allocate from the heap in the majority of cases.
 		{
 			Movie* temp = hashTable[i]->next;
@@ -66,7 +71,7 @@ void HashTable::deleteMovie(std::string& in_title)
 void HashTable::collision_resolution(std::string& in_title, int& in_year, int& key)
 {
 	Movie* new_movie = new Movie(in_title, in_year, key);
-	Movie* it = hashTable[key]->next;
+	Movie* it = hashTable[key];
 	while (it->next != nullptr)
 		it = it->next;
 	it->next = new_movie;
@@ -75,11 +80,12 @@ void HashTable::collision_resolution(std::string& in_title, int& in_year, int& k
 Movie* HashTable::findMovie(std::string& in_title)
 {
 	int key = get_hash_key(in_title);
-	Movie* ans = hashTable[key];
-	if (ans == nullptr)	//if the index has no movie - it is not in the table
+									//case 1
+	if (hashTable[key] == nullptr)	//if there is no movie in the index, nothing there, return nullptr for main() to handle
 		return nullptr;
+	Movie* ans = hashTable[key];	//else handle case 2 & 3
 	if (hashTable[key]->title != in_title)
-	while ((ans->title != in_title) && (ans != nullptr))	//also takes care of the case where the index is taken, but the movie does not exist
+		while ((ans != nullptr) && (ans->title != in_title))	//also takes care of the case where the index is taken, but the movie does not exist
 			ans = ans->next;
 
 	return ans;	//at this point, ans either holds the answer the function call came for, or nullptr, which is the default case for not found

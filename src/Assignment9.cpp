@@ -42,8 +42,7 @@ int main(int argc, char* argv[])
 			year = stoi(buffer);
 			getline(in_file, buffer);		//quantity - ditch
 
-			//add movie or hash then add
-			
+			hash->insertMovie(title, year);
 		}
 	}
 	else
@@ -53,14 +52,14 @@ int main(int argc, char* argv[])
 	
 	int select = 0;
 
-	while (select != 6)
+	while (select < 5)
 	{
 
 		cout << "======Main Menu+=====" << endl
 			<< "1. Insert movie" << endl
 			<< "2. Delete movie" << endl
 			<< "3. Find movie" << endl
-			<< "4. Pritn table contents" << endl
+			<< "4. Print table contents" << endl
 			<< "5. Quit" << endl;
 
 		cin >> select;
