@@ -1,6 +1,6 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
-#define H_TABLE_SIZE 53	//default for this assignment, and used in the default constructor.
+#define H_TABLE_SIZE 10	//default for this assignment, and used in the default constructor.
 
 #include<string>
 

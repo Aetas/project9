@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include"../include/HashTable.h"
+//#include"HashTable.h"
 
 HashTable::HashTable()
 {
@@ -34,13 +35,13 @@ void HashTable::printInventory()
 	{
 		if (hashTable[i] == nullptr)
 			continue;	//skip rest
-		std::cout <<  hashTable[i]->title << " : " << hashTable[i]->year << std::endl;
+		std::cout << hashTable[i]->title << ":" << hashTable[i]->year << std::endl;
 		if (hashTable[i]->next != nullptr)	//I wanted to do this after the initial cout because I don't want to allocate from the heap in the majority of cases.
 		{
 			Movie* temp = hashTable[i]->next;
 			while (temp != nullptr)			//traverse the linked list
 			{
-				std::cout << temp->title << " : " << temp->year << std::endl;
+				std::cout << temp->title << ":" << temp->year << std::endl;
 				temp = temp->next;
 			}
 		}
@@ -62,9 +63,35 @@ void HashTable::insertMovie(std::string& in_title, int& in_year)
 
 void HashTable::deleteMovie(std::string& in_title)
 {
+
 	int key = get_hash_key(in_title);
-	delete hashTable[key];
-	hashTable[key] = nullptr;
+	
+	if (hashTable[key]->title == in_title && hashTable[key]->next == nullptr)
+	{
+		delete hashTable[key];
+		hashTable[key] = nullptr;
+		size--;
+		return;
+	}
+
+	Movie* it = hashTable[key];
+	Movie* prev = it;
+	Movie* del = nullptr;
+
+	while (del == nullptr)
+	{
+		if (it->title == in_title)
+		{
+			del = it;
+			prev->next = del->next;
+			delete del;
+			size--;
+			return;
+		}
+		prev = it;
+		it = it->next;
+	}
+
 	size--;
 }
 
@@ -72,9 +99,26 @@ void HashTable::collision_resolution(std::string& in_title, int& in_year, int& k
 {
 	Movie* new_movie = new Movie(in_title, in_year, key);
 	Movie* it = hashTable[key];
-	while (it->next != nullptr)
+	Movie* prev = it;
+	if (new_movie->title.compare(hashTable[key]->title) < 0)	//if it is before the first entry...
+	{
+		new_movie->next = hashTable[key];
+		hashTable[key]= new_movie;
+		return;
+	}
+	it = it->next;
+	while (it != nullptr)
+	{
+		if (new_movie->title.compare(it->title) < 0)
+		{
+			new_movie->next = it;
+			prev->next = new_movie;
+			return;
+		}
+		prev = it;
 		it = it->next;
-	it->next = new_movie;
+	}
+	prev->next = new_movie;	//if it has not returned yet, make it the last of the chain
 }
 
 Movie* HashTable::findMovie(std::string& in_title)

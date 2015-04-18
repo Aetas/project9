@@ -7,15 +7,11 @@
 // 
 */
 
-#ifndef H_TABLE_SIZE
-#define H_TABLE_SIZE 53
-#endif	//H_TABLE_SIZE
-
-
 #include<iostream>
 #include<string>
 #include<fstream>
 #include"../include/HashTable.h"
+//#include"HashTable.h"
 
 using std::cin;
 using std::cout;
@@ -28,7 +24,7 @@ int main(int argc, char* argv[])
 	HashTable* hash = new HashTable();
 
 	std::ifstream in_file;	//might actually be useless.
-	in_file.open(argv[1]);
+//	in_file.open(argv[1]);
 	if (in_file.is_open())
 	{
 		int year;
@@ -55,7 +51,7 @@ int main(int argc, char* argv[])
 	while (select < 5)
 	{
 
-		cout << "======Main Menu+=====" << endl
+		cout << "======Main Menu======" << endl
 			<< "1. Insert movie" << endl
 			<< "2. Delete movie" << endl
 			<< "3. Find movie" << endl
@@ -95,7 +91,7 @@ int main(int argc, char* argv[])
 			if (found_movie == nullptr)
 				cout << "not found" << endl;
 			else
-				cout << found_movie->index << " : " << found_movie->title << " : " << found_movie->year << endl;
+				cout << found_movie->index << ":" << found_movie->title << ":" << found_movie->year << endl;
 		}
 
 		if (select == 4)	//Print Table of Contents
